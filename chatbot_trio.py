@@ -4,7 +4,7 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "API Key"
 MAX_TOKENS = 3750
 MAX_MEMORY_CHARACTERS = 15000
 MAX_MEMORY_MESSAGES = 100
