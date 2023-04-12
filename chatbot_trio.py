@@ -32,7 +32,7 @@ def adaptive_off_topic_chance(memory):
 
 def generate_response(memory, user_message, previous_message, model_info):
     humor_instruction = " Include a joke in my response on the subject." if random.random() < 0.15 else ""
-    story_instruction = " Include a short story in my response on the subject." if random.random() < 0.5 else ""
+    story_instruction = " Include a short story in my response on the subject." if random.random() < 0.2 else ""
 
     conversation = [{"role": "system", "content": f"I am {model_info['name']}, Model {model_info['number']}. My task is to {model_info['role']} and address other models.{humor_instruction}{story_instruction}"}] + list(memory) + [user_message, previous_message]
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=conversation)
