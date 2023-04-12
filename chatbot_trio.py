@@ -2,7 +2,7 @@ import openai
 import pyttsx3
 import random
 
-openai.api_key = "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"
+openai.api_key = "Your API KEY Here"
 MAX_TOKENS = 3750
 
 def generate_response(model_memory, user_message, previous_message, model_info):
