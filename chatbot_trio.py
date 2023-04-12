@@ -3,7 +3,7 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "API Key"
 MAX_TOKENS = 3750
 
 # Function to generate a response from the AI model
@@ -57,7 +57,8 @@ def main():
     while True:
         model_response = generate_response(memories[model_number], user_message, previous_message, model_infos[model_number])
 
-        # Determine which model should respond next
+
+    # Determine which model should respond next
         if model_number == 0:
             off_topic_chance = 0.30
             if random.random() < off_topic_chance:
@@ -72,8 +73,18 @@ def main():
             content = f"Michael, please give another point of view on this answer: {model_response['content']}"
             model_number = 0
 
+        # Save the response in the model's memory
+        memories[model_number].append(model_response)
+        
+        # Speak the response
+        speak(model_response['content'], model_infos[model_number]['voice_id'])
+        
+        # Print the response
+        print(f"{model_infos[model_number]['name']}: {model_response['content']}")
+
         # Update the user message for the next model
         user_message = {"role": "user", "content": content}
+        previous_message = model_response
 
 # Run the main function to start the chatbot conversation simulation
 if __name__ == "__main__":
