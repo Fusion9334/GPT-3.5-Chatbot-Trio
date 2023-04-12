@@ -3,7 +3,7 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 MAX_TOKENS = 3750
 
 # Function to generate a response from the AI model
@@ -47,7 +47,7 @@ def main():
         {"number": 3, "name": "Michael", "role": "analyze Sarah's response and give another point of view on the subject", "voice_id": 2},
     ]
 
-    # Get user input for conversation subject
+        # Get user input for conversation subject
     subject = input("Enter a conversational subject for the chatbots to talk about: ")
     user_message = {"role": "user", "content": f"John, please write one question on the subject {subject}."}
     previous_message = user_message
@@ -56,23 +56,21 @@ def main():
     # Continue the conversation simulation
     while True:
         model_response = generate_response(memories[model_number], user_message, previous_message, model_infos[model_number])
-        memories[model_number].extend([user_message, previous_message, model_response])
-        memories[model_number] = memories[model_number][-2 * MAX_TOKENS:]
-        print(f"{model_infos[model_number]['name']}: {model_response['content']}")
-        speak(model_response['content'], model_infos[model_number]['voice_id'])
+        # ... (previous code)
 
-        previous_message = model_response
-        user_role = "user"
-        
         # Determine which model should respond next
         if model_number == 0:
-            content = f"Sarah, please answer this question: {model_response['content']}"
+            off_topic_chance = 0.30
+            if random.random() < off_topic_chance:
+                content = f"John, please ask an off-topic question on the subject the other midels taked about."
+            else:
+                content = f"John, please ask another question on the subject {subject}."
             model_number = 1
         elif model_number == 1:
-            content = f"Michael, please give another point of view on this answer: {model_response['content']}"
+            content = f"Sarah, please answer this question: {model_response['content']}"
             model_number = 2
         else:
-            content = f"John, please ask another question on the subject {subject}."
+            content = f"Michael, please give another point of view on this answer: {model_response['content']}"
             model_number = 0
 
         # Update the user message for the next model
