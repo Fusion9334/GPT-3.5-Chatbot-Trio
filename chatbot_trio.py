@@ -3,8 +3,22 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "API Key"
+openai.api_key = "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"
 MAX_TOKENS = 3750
+MAX_MEMORY_CHARACTERS = 15000
+
+# Function to resize memory to the specified limit while preserving the latest question asked by Model 1
+def resize_memory(memory):
+    total_characters = sum([len(msg["content"]) for msg in memory])
+    
+    while total_characters > MAX_MEMORY_CHARACTERS:
+        # Remove the oldest message from memory, except the question at index 0
+        if len(memory) > 2:
+            removed_message = memory.pop(1)
+            total_characters -= len(removed_message["content"])
+        else:
+            break
+
 
 # Function to generate a response from the AI model
 def generate_response(model_memory, user_message, previous_message, model_info):
@@ -57,8 +71,7 @@ def main():
     while True:
         model_response = generate_response(memories[model_number], user_message, previous_message, model_infos[model_number])
 
-
-    # Determine which model should respond next
+        # Determine which model should respond next
         if model_number == 0:
             off_topic_chance = 0.30
             if random.random() < off_topic_chance:
@@ -75,6 +88,9 @@ def main():
 
         # Save the response in the model's memory
         memories[model_number].append(model_response)
+        
+        # Resize the memory to limit it to 15,000 characters while preserving the latest question asked by Model 1
+        resize_memory(memories[model_number])
         
         # Speak the response
         speak(model_response['content'], model_infos[model_number]['voice_id'])
