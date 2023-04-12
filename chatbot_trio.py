@@ -3,7 +3,7 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 MAX_TOKENS = 3750
 
 # Function to generate a response from the AI model
@@ -47,7 +47,7 @@ def main():
         {"number": 3, "name": "Michael", "role": "analyze Sarah's response and give another point of view on the subject", "voice_id": 2},
     ]
 
-        # Get user input for conversation subject
+    # Get user input for conversation subject
     subject = input("Enter a conversational subject for the chatbots to talk about: ")
     user_message = {"role": "user", "content": f"John, please write one question on the subject {subject}."}
     previous_message = user_message
@@ -56,13 +56,12 @@ def main():
     # Continue the conversation simulation
     while True:
         model_response = generate_response(memories[model_number], user_message, previous_message, model_infos[model_number])
-        # ... (previous code)
 
         # Determine which model should respond next
         if model_number == 0:
             off_topic_chance = 0.30
             if random.random() < off_topic_chance:
-                content = f"John, please ask an off-topic question on the subject the other midels taked about."
+                content = f"John, please ask an off-topic question on the subject the other models talked about."
             else:
                 content = f"John, please ask another question on the subject {subject}."
             model_number = 1
@@ -74,7 +73,7 @@ def main():
             model_number = 0
 
         # Update the user message for the next model
-        user_message = {"role": user_role, "content": content}
+        user_message = {"role": "user", "content": content}
 
 # Run the main function to start the chatbot conversation simulation
 if __name__ == "__main__":
