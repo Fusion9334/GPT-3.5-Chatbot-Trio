@@ -4,7 +4,7 @@ import pyttsx3
 import random
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 MAX_TOKENS = 3750
 MAX_MEMORY_CHARACTERS = 15000
 MAX_MEMORY_MESSAGES = 100
@@ -61,7 +61,9 @@ def main():
     ]
     subject = input("Enter a conversational subject for the chatbots to talk about: ")
     user_message = {"role": "user", "content": f"John, please write one question on the subject {subject}."}
-    previous_message = user_message
+    previous_message = {"role": "assistant", "content": ""}
+    model_number = 0
+    #previous_message = {"role": "assistant", "content": ""}
     model_number = 0
 
     while True:
@@ -72,11 +74,11 @@ def main():
         if model_number == 0:
             off_topic_chance = adaptive_off_topic_chance(memories)
             content = f"John, please ask a similar topic question on the same subject the other models talked about." if random.random() < off_topic_chance else f"John, please ask another question on the subject {subject}."
+            user_message = {"role": "user", "content": f"Sarah, please answer John's question: {model_response}"}
             model_number = 1
         elif model_number == 1:
-            user_message = {"role": "user", "content": f"Sarah, please answer John's question: {model_response}"}
+            user_message = {"role": "user", "content": f"Michael, please give another point of view on this answer: {model_response}"}
             model_number = 2
-
         else:
             content = f"Michael, please give another point of view on this answer: {model_response}"
             model_number = 0
@@ -84,8 +86,9 @@ def main():
 
         memories.append({"role": "assistant", "content": model_response})
 
+        previous_message = user_message
         user_message = {"role": "user", "content": content}
-        previous_message = {"role": "assistant", "content": model_response}
+
 
 if __name__ == "__main__":
     main()
