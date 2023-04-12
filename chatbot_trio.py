@@ -2,15 +2,16 @@ import openai
 import pyttsx3
 import random
 
-openai.api_key = "Your API KEY Here"
+openai.api_key = "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"
 MAX_TOKENS = 3750
 
 def generate_response(model_memory, user_message, previous_message, model_info):
-    story_instruction = " Include a short story in your response on the subject." if random.random() < 0.5 else ""
-    humor_instruction = " Include a joke in your response on the subject." if random.random() < 0.15 else ""
-    conversation = [{"role": "system", "content": f"You are {model_info['name']}, Model {model_info['number']}. Your task is to {model_info['role']} and address other models.{humor_instruction}{story_instruction}"}] + model_memory + [user_message, previous_message]
+    story_instruction = " Include a short story in my response on the subject." if random.random() < 0.5 else ""
+    humor_instruction = " Include a joke in my response on the subject." if random.random() < 0.15 else ""
+    conversation = [{"role": "system", "content": f"I am {model_info['name']}, Model {model_info['number']}. My task is to {model_info['role']} and address other models.{humor_instruction}{story_instruction}"}] + model_memory + [user_message, previous_message]
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=conversation)
     return response['choices'][0]['message']
+
 
 def speak(text, voice_id):
     engine = pyttsx3.init()
