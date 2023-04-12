@@ -1,40 +1,42 @@
 # GPT-3.5 Chatbot Trio
 
-This project demonstrates a conversation simulation between three chatbot models, named John, Sarah, and Michael, who use the OpenAI GPT-3.5 Turbo model for generating responses. The chatbots take turns to ask questions, answer them, and give an alternative point of view on the same subject.
+This project simulates a conversation between three chatbot models, John, Sarah, and Michael, utilizing the OpenAI GPT-3.5 Turbo model to generate responses. The chatbots engage in a discussion, asking questions, answering them, and providing alternative perspectives on a given subject.
 
 ## How it works
 
-The main script imports the required libraries, sets up the OpenAI API, and defines functions to handle different aspects of the conversation. The chatbot models follow a predefined conversation flow, and their responses are generated using OpenAI's GPT-3.5 Turbo model.
+The main script imports necessary libraries, sets up the OpenAI API, and defines functions for managing various conversation aspects. The chatbot models follow a predetermined conversation flow, generating responses using OpenAI's GPT-3.5 Turbo model.
 
-## Main components
+## Installing Dependencies
 
-- `resize_memory(memory)`: This function ensures that the total characters in the model's memory do not exceed the specified limit (15,000 characters). It removes the oldest message from memory, except for the question at index 0.
+To install the required libraries, use the following commands:
 
-- `generate_response(model_memory, user_message, previous_message, model_info)`: This function takes the model's memory, user message, previous message, and model information as input, and generates a response from the GPT-3.5 Turbo model.
+```bash
+pip install openai
+pip install pyttsx3
+```
 
-- `speak(text, voice_id)`: This function uses the pyttsx3 library to convert the given text to speech using the specified voice.
+## Main Components
 
-- `handle_model_1(subject, off_topic_chance)`, `handle_model_2(response_content)`, and `handle_model_3(response_content)`: These functions handle the conversation flow for each of the chatbot models, returning appropriate content for user messages.
-
-- `main()`: This is the main function that initializes the chatbot models, their voices, and memories. It also sets the conversation subject and starts the conversation simulation.
+- `resize_memory(memory)`: Limits the total characters in the model's memory to the specified limit (15,000 characters) by removing the oldest messages, except for the question at index 0.
+- `generate_response(model_memory, user_message, previous_message, model_info)`: Generates a response from the GPT-3.5 Turbo model using the model's memory, user message, previous message, and model information.
+- `speak(text, voice_id)`: Converts the given text to speech using the specified voice with the pyttsx3 library.
+- `handle_model_x(response_content)`: Functions for managing the conversation flow for each chatbot model, returning appropriate content for user messages.
+- `main()`: Initializes the chatbot models, their voices, and memories, sets the conversation subject, and starts the conversation simulation.
 
 ## Usage
 
-Ensure you have the required libraries installed: `openai`, `pyttsx3`, and `random`.
-
-Set your OpenAI API key in the `openai.api_key` variable.
-
-Run the script, and enter a conversational subject for the chatbots to talk about.
-
-The chatbots will start conversing, with their responses being printed on the console and spoken using the `pyttsx3` library.
+1. Ensure the required libraries (openai, pyttsx3, and random) are installed.
+2. Set your OpenAI API key in the `openai.api_key` variable.
+3. Run the script and enter a conversational subject for the chatbots to discuss.
+4. The chatbots begin conversing, with their responses printed on the console and spoken using the pyttsx3 library.
 
 ## Customization
 
-You can customize various aspects of the chatbot conversation, such as the subject, off-topic chance, and the inclusion of stories or humor in the responses. Modify the corresponding variables and functions in the script as needed.
+Customize various aspects of the chatbot conversation, such as the subject, off-topic chance, and the inclusion of stories or humor in the responses, by modifying the corresponding variables and functions in the script.
 
 ## License
 
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## In-Depth Explanation
 
@@ -42,11 +44,11 @@ In this section, we'll dive deeper into the code to understand how the different
 
 ### `resize_memory(memory)`
 
-The purpose of this function is to limit the total number of characters in a model's memory. It takes the memory as input and iteratively removes the oldest message from memory until the total number of characters is within the specified limit. It avoids removing the latest question asked by Model 1 (John) to preserve context. This ensures that the conversation stays within the memory constraints of the GPT-3.5 Turbo model.
+This function limits the total number of characters in a model's memory. It takes the memory as input and iteratively removes the oldest message from memory until the total number of characters is within the specified limit. It avoids removing the latest question asked by Model 1 (John) to preserve context. This ensures that the conversation stays within the memory constraints of the GPT-3.5 Turbo model.
 
 ### `generate_response(model_memory, user_message, previous_message, model_info)`
 
-This function is responsible for generating responses from the GPT-3.5 Turbo model. It takes the following input parameters:
+This function generates responses from the GPT-3.5 Turbo model using the following input parameters:
 
 - `model_memory`: The memory of the current chatbot model.
 - `user_message`: The message provided by the user (or another model) to the current model.
@@ -57,7 +59,7 @@ It constructs a conversation structure by concatenating the system message, mode
 
 ### `speak(text, voice_id)`
 
-This function utilizes the `pyttsx3` library to convert the given text to speech. It takes the text and a voice ID as input, sets the desired voice, and speaks the text aloud.
+This function utilizes the pyttsx3 library to convert the given text to speech. It takes the text and a voice ID as input, sets the desired voice, and speaks the text aloud.
 
 ### `handle_model_x(response_content)`
 
