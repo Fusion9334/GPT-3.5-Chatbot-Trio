@@ -5,7 +5,7 @@ import random
 import re
 
 # Set OpenAI API key
-openai.api_key = "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"
+openai.api_key = "Your API key"
 MAX_TOKENS = 3750   #this is the number of tokens that can be used in a single request
 MAX_MEMORY_CHARACTERS = 15000 #this is the number of characters that can be stored in the memory
 MAX_MEMORY_MESSAGES = 100   #this is the number of messages that can be stored in the memory
