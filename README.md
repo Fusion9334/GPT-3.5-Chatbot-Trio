@@ -1,4 +1,4 @@
-# GPT-4 Chatbot Trio
+# GPT-3.5 Chatbot Trio
 
 This Python script demonstrates an AI-powered chatbot conversation simulation using the OpenAI API and text-to-speech technology with pyttsx3. Three chatbot models take turns discussing a user-defined subject, each fulfilling a specific role in the conversation. The chatbots ask questions, provide answers, and give alternative points of view, occasionally including jokes or short stories in their responses. This interactive, multi-chatbot experience showcases the potential of AI in generating human-like conversations, making it an excellent foundation for developing engaging voice assistants or chat-based applications optimized for search engine visibility.
 
