@@ -166,7 +166,7 @@ class ChatbotApp(App):
         return off_topic_base_chance / 2 if off_topic_questions >= 3 else off_topic_base_chance
 
     def speak(self, text, voice_id):
-        if self.speech_checkbox.active and not self.stop_event.is_set():
+        if self.speech_checkbox.active and not self.stop_event.is_set() and text.strip():
             tts = gTTS(text=text, lang='en', slow=False)
             tts.save("temp_audio.mp3")
 
@@ -178,6 +178,7 @@ class ChatbotApp(App):
             pygame.mixer.quit()
 
             os.remove("temp_audio.mp3")
+
 
 
     def conversation_loop(self, subject, user_message, previous_message, model_number):
