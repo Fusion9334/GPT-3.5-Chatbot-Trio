@@ -14,7 +14,7 @@ from gtts import gTTS
 from playsound import playsound
 
 pygame.mixer.init()
-# Set OpenAI API key
+# Set OpenAI key
 
 
 # The rest of the code remains the same until the ChatbotApp class
@@ -40,7 +40,7 @@ class ChatbotApp(App):
             threading.Thread(target=self.conversation_loop, args=(subject, user_message, previous_message, model_number)).start()
 
     responses_queue = Queue()
-    openai.api_key = "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"
+    openai.api_key = "Your API"
     MAX_TOKENS = 3750   #this is the number of tokens that can be used in a single request
     MAX_MEMORY_CHARACTERS = 15000 #this is the number of characters that can be stored in the memory
     MAX_MEMORY_MESSAGES = 100   #this is the number of messages that can be stored in the memory
